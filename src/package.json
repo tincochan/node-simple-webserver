@@ -1,0 +1,26 @@
+{
+  "name": "node-simple-webserver",
+  "version": "1.0.3",
+  "description": "Simple Node.js server running Fastify",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest __tests__ --collectCoverage",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "webserver",
+    "node server",
+    "fastify server",
+    "example server",
+    "serverless webserver",
+    "serverless server"
+  ],
+  "author": "Tinco Chan",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^2.12.0"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}

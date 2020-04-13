@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $REGION)
+      - cd src
+      - npm install
+      - npm test
+      - cd ..
+  build:
+    commands:
+      - echo Build started on `node-simple-webserver`
+      - echo Building the Docker image...
+      - docker build -t $PROJECT_NAME .
+      - docker tag $PROJECT_NAME:$IMAGE_TAG $ACCOUNT_NUMBER.dkr.ecr.$REGION.amazonaws.com/$PROJECT_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `node-simple-webserver`
+      - echo Pushing the Docker image...
+      - docker push $ACCOUNT_NUMBER.dkr.ecr.$REGION.amazonaws.com/$PROJECT_NAME:$IMAGE_TAG
